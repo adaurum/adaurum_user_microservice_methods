@@ -8,7 +8,7 @@ class User
     public $name;
     public $last_name;
     public $email;
-    public $role;
+    public $roles;
 
     public function __construct($json)
     {
@@ -16,6 +16,6 @@ class User
         $this->name = $json['name'];        
         $this->last_name = $json['last_name'];        
         $this->email = $json['email'];        
-        $this->role = $json['role'];  
+        $this->roles = $json['roles'];  
     }
 }
