@@ -3,7 +3,6 @@
 namespace Microservices;
 
 use Microservices\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 
 class UserService{
@@ -39,44 +38,5 @@ class UserService{
         $json = $this->request()->get($this->endpoint."/user")->json();
 
 		return new User($json);
-	}
-
-	public function allows($ability, $arguments)
-	{
-		Gate::forUser($this->getUser())->authorize($ability, $arguments);
-	}
-
-	public function all($page)
-	{
-		return $this->request()->get($this->endpoint."/users?page={$page}")->json();
-	}
-
-	public function get($id): User
-	{
-		$json = $this->request()->get($this->endpoint."/users/{$id}")->json();
-
-		return new User($json);
-
-	}
-
-	public function create($data): User
-	{
-		$json = $this->request()->post($this->endpoint."/users", $data)->json();
-
-		return new User($json);
-
-	}
-
-	public function update($id, $data): User
-	{
-		$json = $this->request()->put($this->endpoint."/users/{$id}", $data)->json();
-
-		return new User($json);
-
-	}
-
-	public function delete($id)
-	{
-		return $this->request()->delete($this->endpoint."/users/{$id}")->successful();
 	}
 }
